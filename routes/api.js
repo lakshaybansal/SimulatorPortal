@@ -37,7 +37,7 @@ router.get('/getThings', function(req, res){
       url: 'https://api.datonis.io/api/v3/things',
       headers: {
         'Content-Type' : 'application/json',
-        'X-Auth-Token': 'vlpjTuFfyFrawoa4rmGffA'
+        'X-Auth-Token': 'sloosSW-q86aYomaGcpXPQ'
       },
       json: true
   };
@@ -49,5 +49,29 @@ router.get('/getThings', function(req, res){
     res.send(err);
   })
 })
+
+router.get('/getMetrics', function(req, res){
+
+  var authOptions = {
+      method: 'GET',
+      url: 'https://api.datonis.io/api/v3/metrics',
+      data: {
+        thing_template_key: 'ae5247248b'
+      },
+      headers: {
+        'Content-Type' : 'application/json',
+        'X-Auth-Token': 'sloosSW-q86aYomaGcpXPQ'
+      },
+      json: true
+  };
+
+  axios(authOptions).then(function(response){
+    res.send(response.data);
+  }, function(err){
+    console.log(err.response.data);
+    res.send(err.response.data);
+  })
+})
+
 
 module.exports = router;

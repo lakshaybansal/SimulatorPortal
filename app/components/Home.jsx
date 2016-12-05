@@ -5,6 +5,7 @@ var Home = React.createClass({
     return (
       <div>
         <p>Home Page</p>
+        <p>Metrics</p>
       </div>
     );
   }

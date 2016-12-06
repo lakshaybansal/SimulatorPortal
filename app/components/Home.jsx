@@ -10,10 +10,10 @@ getInitialState:function(){
 },
   componentDidMount:function(){
   var _this=this;
-  this.serverRequest=axios.get('/api/getThings').then(function(data){
+  this.serverRequest=axios.get('/api/getMetrics').then(function(data){
     console.log('Success');
     console.log(data);
-    _this.setState({metricAll:data.data.things});
+    _this.setState({metricAll:data.data.metrics});
   }, function(err){
     console.log(err);
   });
@@ -22,7 +22,7 @@ getInitialState:function(){
   return (
     <div>
         <h1>Home</h1>
-        {this.state.metrics}
+        {this.state.metricAll}
         <h1>Metrics are</h1>
           {this.state.metricAll.map(function(metric) {
             return (

@@ -56,22 +56,23 @@ router.get('/getMetrics', function(req, res){
       method: 'GET',
       url: 'https://api.datonis.io/api/v3/metrics',
       data: {
-        thing_template_key: 'ae5247248b'
+        'thing_template_key':'e53898a17c'
       },
       headers: {
         'Content-Type' : 'application/json',
-        'X-Auth-Token': 'sloosSW-q86aYomaGcpXPQ'
+        'X-Auth-Token': '5SMpVdWASfmSYxvJwC09eQ'
       },
       json: true
   };
 
   axios(authOptions).then(function(response){
+
     res.send(response.data);
   }, function(err){
     console.log(err.response.data);
     res.send(err.response.data);
   })
-})
+});
 
 
 module.exports = router;

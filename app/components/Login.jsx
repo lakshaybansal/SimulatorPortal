@@ -37,6 +37,9 @@ var Login = React.createClass({
                             margin: '5px 0px 0px 400px'
                         }} />
                     </div>
+                    <div>
+                      <a href="#/home">Home</a>
+                    </div>
                 </form>
             </div>
 

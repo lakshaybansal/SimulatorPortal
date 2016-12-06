@@ -37,7 +37,7 @@ router.get('/getThings', function(req, res){
       url: 'https://api.datonis.io/api/v3/things',
       headers: {
         'Content-Type' : 'application/json',
-        'X-Auth-Token': 'sloosSW-q86aYomaGcpXPQ'
+        'X-Auth-Token': authToken
       },
       json: true
   };
@@ -60,7 +60,7 @@ router.get('/getMetrics', function(req, res){
       },
       headers: {
         'Content-Type' : 'application/json',
-        'X-Auth-Token': 'sloosSW-q86aYomaGcpXPQ'
+        'X-Auth-Token': authToken
       },
       json: true
   };

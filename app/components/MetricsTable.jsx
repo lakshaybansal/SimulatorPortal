@@ -6,37 +6,56 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
-
+//var i=0;
 var MetricsTable = React.createClass({
   getInitialState: function () {
     return {
       value: {}
     }
   },
-  handleBooleanValues: function (metric_key,event,index,value2) {
-    // e.preventDefault();
-    console.log(metric_key);
-    console.log(value2);
-    this.state.value[metric_key] = value2;
-    console.log(this.state.value);
-    this.setState({value:this.state.value});
+  handleBooleanValues: function (event,index,value2,metricKey) {
+    console.log("event:",event);
+    console.log("index:",index);
+    console.log("value:",value2);
+    console.log('metric_key',metricKey);
+     var tempObj = this.state.value;
+     tempObj[metricKey] = value2;
+     this.setState({value : tempObj});
   },
+  handleTextValues: function (event,metricKey) {
+    console.log("event:",event);
+    console.log('metric_key',metricKey);
+    console.log("value",event.target.value);
+     var tempObj = this.state.value;
+     tempObj[metricKey] = event.target.value;
+     this.setState({value : tempObj});
+  },
+ //  ComponentWillMount:function(){
+ //   MetricArray=this.props.metrics;
+ //   var self=this;
+ //   MetricArray.map(function(metric){
+ //     self.setState({userInput[metric.metric_key]:metric.value})
+ //   })
+ // },
   render: function (props) {
     var p=this;
     var newValueField = function(metric) {
-        var t=metric.data_type;
-        var c=metric.metric_key;
-        // console.log(t);
+      var t=metric.data_type;
+      var c=metric.metric_key;
         if(t==0)
         {
-          // console.log("In 0");
-          return(<TextField key={c} hintText="Enter value" />);
+          //console.log("In 0");
+          return(<TextField hintText="Hint Text"  value={p.state.value[c]} onChange={function(e){
+            p.handleTextValues(e,c);
+          }} />);
         }
         if(t==2)
         {
-           return(<SelectField key={c} floatingLabelText="Boolean" value={p.state.value[c]} onChange={p.handleBooleanValues.bind(p,c)}>
-            <MenuItem value={false} primaryText="false" />
-            <MenuItem value={true} primaryText="true" />
+           return(<SelectField key={c} floatingLabelText="Boolean" value={p.state.value[c]}  onChange={function(e,index,value){
+             p.handleBooleanValues(e,index,value,c);
+           }}>
+            <MenuItem value={false} primaryText="No" />
+            <MenuItem value={true} primaryText="Yes" />
           </SelectField>);
         }
       }

@@ -8,44 +8,35 @@ import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
 var MetricsTable = React.createClass({
-  ValueField:function(){
-    var metricArray=this.props.metrics;
-    metricArray.map(function(metrics, i) {
-
-      var t=metrics.data_type;
-      console.log(t);
-      if(t==0)
-      {
-        return(<TextField hintText="Hint Text"
-            defaultValue="Default Value" />);
-      }
-      if(t==2)
-      {
-         return(<SelectField floatingLabelText="Ready?" value="Yes">
-          <MenuItem value={null} primaryText="" />
-          <MenuItem value={false} primaryText="No" />
-          <MenuItem value={true} primaryText="Yes" />
-        </SelectField>);
-      }
-    })
+  getInitialState: function () {
+    return {
+      value: {}
+    }
+  },
+  handleBooleanValues: function (metric_key,event,index,value2) {
+    // e.preventDefault();
+    console.log(metric_key);
+    console.log(value2);
+    this.state.value[metric_key] = value2;
+    console.log(this.state.value);
+    this.setState({value:this.state.value});
   },
   render: function (props) {
     var p=this;
     var newValueField = function(metric) {
         var t=metric.data_type;
-        console.log(t);
+        var c=metric.metric_key;
+        // console.log(t);
         if(t==0)
         {
-          console.log("In 0");
-          return(<TextField hintText="Hint Text"
-              defaultValue="Default Value" />);
+          // console.log("In 0");
+          return(<TextField key={c} hintText="Enter value" />);
         }
         if(t==2)
         {
-           return(<SelectField floatingLabelText="Ready?" value="Yes">
-            <MenuItem value={null} primaryText="" />
-            <MenuItem value={false} primaryText="No" />
-            <MenuItem value={true} primaryText="Yes" />
+           return(<SelectField key={c} floatingLabelText="Boolean" value={p.state.value[c]} onChange={p.handleBooleanValues.bind(p,c)}>
+            <MenuItem value={false} primaryText="false" />
+            <MenuItem value={true} primaryText="true" />
           </SelectField>);
         }
       }

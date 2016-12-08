@@ -74,5 +74,12 @@ router.get('/getMetrics', function(req, res){
   })
 });
 
+router.post('/postChanges', function(req, res){
+  var fields=req.body.fields;
+
+  console.log("Got Data", fields);
+  res.send("Yooo");
+});
+
 
 module.exports = router;

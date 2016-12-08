@@ -11,19 +11,18 @@ getInitialState:function(){
 },
   componentDidMount:function(){
   var self=this;
-  axios.get('/api/getMetrics').then(function(data){
+  axios.get('/api/getMetrics').then(function(response){
     console.log('Success');
-    console.log(data);
-    self.setState({metricArray:data.data.metrics});
+    console.log(response.data);
+    self.setState({metricArray: response.data.metrics});
   }, function(err){
     console.log(err);
   });
   },
   render: function(){
-  return (
-    <MetricsTable metrics={this.state.metricArray} />
-
-  )
+    return (
+      <MetricsTable metrics={this.state.metricArray} />
+      );
   }
 });
 

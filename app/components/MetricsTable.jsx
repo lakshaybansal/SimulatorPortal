@@ -19,7 +19,6 @@ var MetricsTable = React.createClass({
     fields[metricKey] = value;
     this.setState({fields: fields});
     console.log(this.state.fields);
-     this.setState({value : tempObj});
   },
   handleTextValues: function (event, metricKey) {
     var fields = this.state.fields;
@@ -50,8 +49,6 @@ var MetricsTable = React.createClass({
         {
           return <TextField key={metricKey} hintText="Enter value" value={self.state.fields[metricKey] || ''}
           onChange={function(e) {self.handleTextValues(e, metricKey); } } />;
-            p.handleTextValues(e,c);
-          }} />);
         }
         if(dataType == 2)
         {
@@ -64,6 +61,8 @@ var MetricsTable = React.createClass({
            return (
             <SelectField key={metricKey} value={self.state.fields[metricKey]}
             onChange={function(e, index, value) { self.handleBooleanValues(e, index, value, metricKey); }}>
+              <MenuItem value={false} primaryText="No" />
+              <MenuItem value={true} primaryText="Yes" />
             </SelectField>
           );
         }

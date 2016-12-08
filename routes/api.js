@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var axios = require('axios');
+var fs=require('fs');
 
 var authToken;
 
@@ -56,7 +57,8 @@ router.get('/getMetrics', function(req, res){
       method: 'GET',
       url: 'https://api.datonis.io/api/v3/metrics',
       data: {
-        'thing_template_key':'e53898a17c'
+        'thing_template_key':'e53898a17c',
+        'per': 40
       },
       headers: {
         'Content-Type' : 'application/json',
@@ -73,10 +75,14 @@ router.get('/getMetrics', function(req, res){
     res.send(err.response.data);
   })
 });
-
+router.get('/getMetricValues',function(req,res){
+  fs.readFile('a.json', 'utf-8', function(err, data){
+   //console.log(data);
+   res.send(data);
+  });
+});
 router.post('/postChanges', function(req, res){
   var fields=req.body.fields;
-
   console.log("Got Data", fields);
   res.send("Yooo");
 });

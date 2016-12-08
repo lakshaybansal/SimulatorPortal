@@ -26,7 +26,7 @@ var MetricsTable = React.createClass({
     this.setState({fields: fields});
     console.log(this.state.fields);
   },
-  onButtonSubmit: function (e) {
+  handleButtonSubmit: function (e) {
     e.preventDefault();
     var data = {
       fields: this.state.fields
@@ -102,7 +102,7 @@ var MetricsTable = React.createClass({
           <TableFooter adjustForCheckbox={false} >
             <TableRow>
               <TableRowColumn colSpan="4" style={{textAlign: 'center'}}>
-                <RaisedButton type="submit" label="Submit" primary={true} onClick={this.onButtonSubmit}
+                <RaisedButton type="submit" label="Submit" primary={true} onClick={this.handleButtonSubmit}
                   />
               </TableRowColumn>
             </TableRow>

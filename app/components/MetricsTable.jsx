@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Home from 'Home';
 
-import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import {Table, TableBody, TableHeader, TableFooter, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
@@ -70,17 +70,21 @@ var MetricsTable = React.createClass({
 
     return (
       <div>
-        <h1>Metrics: </h1>
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn>S.No</TableHeaderColumn>
-              <TableHeaderColumn>Metric Key</TableHeaderColumn>
-              <TableHeaderColumn>Metric Name</TableHeaderColumn>
-              <TableHeaderColumn>Metric Value</TableHeaderColumn>
+              <TableHeaderColumn colSpan="4" tooltip="List of All Metrics" style={{textAlign: 'center'}}>
+                <h2>List of All Metrics</h2>
+              </TableHeaderColumn>
+            </TableRow>
+            <TableRow>
+              <TableHeaderColumn><h4>S.No</h4></TableHeaderColumn>
+              <TableHeaderColumn><h4>Metric Key</h4></TableHeaderColumn>
+              <TableHeaderColumn><h4>Metric Name</h4></TableHeaderColumn>
+              <TableHeaderColumn><h4>Metric Value</h4></TableHeaderColumn>
             </TableRow>
           </TableHeader>
-          <TableBody displayRowCheckbox={false}>
+          <TableBody displayRowCheckbox={false} showRowHover={true}>
             {metricArray.map(function(metric, i) {
               return (
                 <TableRow key={metric.metric_key}>
@@ -92,14 +96,19 @@ var MetricsTable = React.createClass({
                   </TableRowColumn>
                 </TableRow>
               )
-          }
+            }
           )}
           </TableBody>
+          <TableFooter adjustForCheckbox={false} >
+            <TableRow>
+              <TableRowColumn colSpan="4" style={{textAlign: 'center'}}>
+                <RaisedButton type="submit" label="Submit" primary={true} onClick={this.onButtonSubmit}
+                  />
+              </TableRowColumn>
+            </TableRow>
+          </TableFooter>
         </Table>
-        <RaisedButton type="submit" label="Submit" primary={true} onClick={this.onButtonSubmit}
-          style={{
-            margin: '5px 0px 0px 400px'
-        }} />
+
       </div>
     );
   }

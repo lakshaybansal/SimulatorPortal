@@ -34,7 +34,7 @@ var Login = React.createClass({
                     </div>
                     <div>
                         <RaisedButton type="submit" label="Submit" primary={true} style={{
-                            margin: '5px 0px 0px 400px'
+                            margin: '5px 0px 0px 500px'
                         }} />
                     </div>
                     <div>

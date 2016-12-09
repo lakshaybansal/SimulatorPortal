@@ -12,8 +12,7 @@ getInitialState:function(){
   componentDidMount:function(){
   var self=this;
   axios.get('/api/getMetrics').then(function(response){
-    console.log('Success');
-    console.log(response.data);
+    console.log('Loaded metrics from Datonis!');
     self.setState({metricArray: response.data.metrics});
   }, function(err){
     console.log(err);

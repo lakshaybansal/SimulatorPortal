@@ -33,7 +33,7 @@ var MetricsTable = React.createClass({
     }
 
     axios.post('/api/postChanges', data).then(function (response){
-      console.log('Success', response);
+      console.log('Saved metrics file successfully!');
     }, function (error) {
       console.log(error);
     });
@@ -42,22 +42,14 @@ var MetricsTable = React.createClass({
     var fieldsInitial;
     var self = this;
     axios.get('/api/getMetricValues').then(function (response){
-      console.log('Success Metric', response);
-      fieldsInitial=response.data;
 
-      console.log("Fields: ", fieldsInitial);
+      fieldsInitial=response.data;
       self.setState({fields:fieldsInitial});
-      console.log(self.state.fields);
+      console.log('Loaded metrics file successfully!');
 
     }, function (error) {
       console.log(error);
     });
-
-  //  var self=this
-  //     fieldsInitial.map(function(){
-  //     self.setState({userInput[metric.metric_key]:metric.value})
-  //  })
-
   },
   render: function () {
     var self=this;
@@ -82,8 +74,8 @@ var MetricsTable = React.createClass({
            return (
             <SelectField key={metricName} value={self.state.fields[metricName]}
             onChange={function(e, index, value) { self.handleBooleanValues(e, index, value, metricName); }}>
-              <MenuItem value={false} primaryText="No" />
-              <MenuItem value={true} primaryText="Yes" />
+              <MenuItem value={false} primaryText="false" />
+              <MenuItem value={true} primaryText="true" />
             </SelectField>
           );
         }

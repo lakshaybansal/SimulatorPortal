@@ -76,15 +76,18 @@ router.get('/getMetrics', function(req, res){
   })
 });
 router.get('/getMetricValues',function(req,res){
-  fs.readFile('a.json', 'utf-8', function(err, data){
+  fs.readFile('metrics.json', 'utf8', function(err, data){
    //console.log(data);
    res.send(data);
   });
 });
 router.post('/postChanges', function(req, res){
   var fields=req.body.fields;
-  console.log("Got Data", fields);
-  res.send("Yooo");
+  fs.writeFile('metrics.json', JSON.stringify(fields), 'utf8', function(err) {
+    if(err) throw err;
+    console.log("Saved metrics successfully!");
+  })
+  res.send("Saved metrics successfully!");
 });
 
 

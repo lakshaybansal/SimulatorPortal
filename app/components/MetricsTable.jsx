@@ -14,15 +14,15 @@ var MetricsTable = React.createClass({
       fields: {}
     }
   },
-  handleBooleanValues: function (event, index, value, metricKey) {
+  handleBooleanValues: function (event, index, value, metricName) {
     var fields = this.state.fields;
-    fields[metricKey] = value;
+    fields[metricName] = value;
     this.setState({fields: fields});
     console.log(this.state.fields);
   },
-  handleTextValues: function (event, metricKey) {
+  handleTextValues: function (event, metricName) {
     var fields = this.state.fields;
-    fields[metricKey] = event.target.value;
+    fields[metricName] = event.target.value;
     this.setState({fields: fields});
     console.log(this.state.fields);
   },
@@ -33,36 +33,49 @@ var MetricsTable = React.createClass({
     }
 
     axios.post('/api/postChanges', data).then(function (response){
-      console.log('Success', response);
+      console.log('Saved metrics file successfully!');
     }, function (error) {
       console.log(error);
-    })
+    });
+  },
+  componentWillMount:function(){
+    var fieldsInitial;
+    var self = this;
+    axios.get('/api/getMetricValues').then(function (response){
+
+      fieldsInitial=response.data;
+      self.setState({fields:fieldsInitial});
+      console.log('Loaded metrics file successfully!');
+
+    }, function (error) {
+      console.log(error);
+    });
   },
   render: function () {
     var self=this;
     var metricArray = this.props.metrics;
     var valueField = function(metric) {
         var dataType=metric.data_type;
-        var metricKey=metric.metric_key;
+        var metricName=metric.name;
 
-        if(dataType == 0)
+        if(dataType == 0 || dataType==1)
         {
-          return <TextField key={metricKey} hintText="Enter value" value={self.state.fields[metricKey] || ''}
-          onChange={function(e) {self.handleTextValues(e, metricKey); } } />;
+          return <TextField key={metricName} hintText="Enter value" value={self.state.fields[metricName] || ''}
+          onChange={function(e) {self.handleTextValues(e, metricName); } } />;
         }
         if(dataType == 2)
         {
           // Set default false values for all SelectFields
-          var fields = self.state.fields;
-          if(fields[metricKey] === undefined) {
-            fields[metricKey] = false;
-          }
+          // var fields = self.state.fields;
+          // if(fields[metricName] === undefined) {
+          //   fields[metricName] = false;
+          // }
 
            return (
-            <SelectField key={metricKey} value={self.state.fields[metricKey]}
-            onChange={function(e, index, value) { self.handleBooleanValues(e, index, value, metricKey); }}>
-              <MenuItem value={false} primaryText="No" />
-              <MenuItem value={true} primaryText="Yes" />
+            <SelectField key={metricName} value={self.state.fields[metricName]}
+            onChange={function(e, index, value) { self.handleBooleanValues(e, index, value, metricName); }}>
+              <MenuItem value={false} primaryText="false" />
+              <MenuItem value={true} primaryText="true" />
             </SelectField>
           );
         }
@@ -87,7 +100,7 @@ var MetricsTable = React.createClass({
           <TableBody displayRowCheckbox={false} showRowHover={true}>
             {metricArray.map(function(metric, i) {
               return (
-                <TableRow key={metric.metric_key}>
+                <TableRow key={metric.name}>
                   <TableRowColumn>{i}</TableRowColumn>
                   <TableRowColumn>{metric.metric_key}</TableRowColumn>
                   <TableRowColumn>{metric.name}</TableRowColumn>

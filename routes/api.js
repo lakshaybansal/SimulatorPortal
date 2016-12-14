@@ -57,7 +57,7 @@ router.get('/getMetrics', function(req, res){
       method: 'GET',
       url: 'https://api.datonis.io/api/v3/metrics',
       data: {
-        'thing_template_key':'e53898a17c',
+        'thing_template_key':'b5dt846d6c',
         'per': 40
       },
       headers: {

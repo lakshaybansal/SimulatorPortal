@@ -23,7 +23,7 @@ var Login = React.createClass({
             <div>
                 <form onSubmit={this.onLogin}>
                     <div>
-                        <TextField hintText="Email" defaultValue="blakshay93@gmail.com" ref="email" style={{
+                        <TextField hintText="Email" defaultValue="" ref="email" style={{
                             margin: '5px 0px 0px 400px'
                         }}/>
                     </div>

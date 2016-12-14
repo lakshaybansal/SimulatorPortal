@@ -6,7 +6,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Main from 'Main';
 import Login from 'Login';
-import Home from 'Home';
+import MetricsHome from 'MetricsHome';
+import ThingsHome from 'ThingsHome';
 
 // Load custom styles
 require('style!css!sass!applicationStyles');
@@ -19,7 +20,8 @@ render(){
    <MuiThemeProvider>
      <Router history={hashHistory}>
        <Route path="/" component={Main}>
-         <Route path="/home" component={Home}></Route>
+         <Route path="/Metricshome" component={MetricsHome}></Route>
+         <Route path="/Thingshome" component={ThingsHome}></Route>
          <IndexRoute component={Login}/>
        </Route>
      </Router>

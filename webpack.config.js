@@ -15,8 +15,10 @@ module.exports = {
       applicationStyles: 'app/styles/app.scss',
       Navigation: 'app/components/Navigation.jsx',
       Login: 'app/components/Login.jsx',
-      Home: 'app/components/Home.jsx',
-      MetricsTable: 'app/components/MetricsTable.jsx'
+      MetricsHome: 'app/components/MetricsHome.jsx',
+      ThingsHome: 'app/components/ThingsHome.jsx',
+      MetricsTable: 'app/components/MetricsTable.jsx',
+      ThingsTable:'app/components/ThingsTable.jsx'
     },
     extensions: ['','.js', '.jsx']
   },

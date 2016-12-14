@@ -13,7 +13,7 @@ var Login = React.createClass({
       };
       axios.post('/api/getAuth', data).then(function(data){
         console.log('Success');
-        window.location.hash = '#/home';
+        window.location.hash = '#/Thingshome';
       }, function(err){
         console.log(err);
       })
@@ -38,7 +38,7 @@ var Login = React.createClass({
                         }} />
                     </div>
                     <div>
-                      <a href="#/home">Home</a>
+                      <a href="#/Thingshome">Home</a>
                     </div>
                 </form>
             </div>

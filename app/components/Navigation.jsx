@@ -8,10 +8,19 @@ var Navigation = React.createClass({
      return {open: false};
   },
   handleToggle:function(){
-    this.setState({open: !this.state.open});
+  this.setState({open: !this.state.open});
 },
-handleClose:function(){
+handleMetricClose:function(){
   this.setState({open: false});
+  window.location.hash = '#/Metricshome';
+},
+handleThingClose:function(){
+  this.setState({open: false});
+  window.location.hash = '#/Thingshome';
+},
+handleHomeClose:function(){
+  this.setState({open: false});
+  window.location.hash = '#/';
 },
   render: function(){
     return (
@@ -21,8 +30,9 @@ handleClose:function(){
               width={300}
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}>
-            <MenuItem onTouchTap={this.handleClose}>Things</MenuItem>
-            <MenuItem onTouchTap={this.handleClose}>Metrics</MenuItem>
+            <MenuItem onTouchTap={this.handleHomeClose}>Home</MenuItem>
+            <MenuItem onTouchTap={this.handleThingClose}>Things</MenuItem>
+            <MenuItem onTouchTap={this.handleMetricClose}>Metrics</MenuItem>
           </Drawer>
       </div>
     );

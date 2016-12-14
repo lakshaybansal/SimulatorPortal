@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import Home from 'Home';
+import MetricsHome from 'MetricsHome';
 
 import {Table, TableBody, TableHeader, TableFooter, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import TextField from 'material-ui/TextField';

@@ -49,7 +49,7 @@ router.get('/getThings', function(req, res){
     console.log(err);
     res.send(err);
   })
-});
+})
 
 router.get('/getMetrics', function(req, res){
 
@@ -57,7 +57,7 @@ router.get('/getMetrics', function(req, res){
       method: 'GET',
       url: 'https://api.datonis.io/api/v3/metrics',
       data: {
-        'thing_template_key':'b5dt846d6c',
+        'thing_template_key':'e53898a17c',
         'per': 40
       },
       headers: {
@@ -68,10 +68,9 @@ router.get('/getMetrics', function(req, res){
   };
 
   axios(authOptions).then(function(response){
-    console.log("Not error");
+
     res.send(response.data);
   }, function(err){
-    console.log("error");
     console.log(err.response.data);
     res.send(err.response.data);
   })

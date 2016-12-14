@@ -49,7 +49,7 @@ router.get('/getThings', function(req, res){
     console.log(err);
     res.send(err);
   })
-})
+});
 
 router.get('/getMetrics', function(req, res){
 
@@ -68,9 +68,10 @@ router.get('/getMetrics', function(req, res){
   };
 
   axios(authOptions).then(function(response){
-
+    console.log("Not error");
     res.send(response.data);
   }, function(err){
+    console.log("error");
     console.log(err.response.data);
     res.send(err.response.data);
   })

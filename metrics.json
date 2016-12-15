@@ -1,5 +1,5 @@
-{"fuel_level":"100",
-  "engine_oil_pressure":"200",
+{"fuel_level":100,
+  "engine_oil_pressure":200,
   "machine_battery_status":true,
   "fuel_economy":150,
   "engine_rpm":30,

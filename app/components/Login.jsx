@@ -28,7 +28,7 @@ var Login = React.createClass({
                         }}/>
                     </div>
                     <div>
-                        <TextField hintText="Password" ref="password" type="password" style={{
+                        <TextField hintText="Password" defaultValue="" ref="password" type="password" style={{
                             margin: '5px 0px 0px 400px'
                         }}/>
                     </div>
@@ -36,9 +36,6 @@ var Login = React.createClass({
                         <RaisedButton type="submit" label="Submit" primary={true} style={{
                             margin: '5px 0px 0px 500px'
                         }} />
-                    </div>
-                    <div>
-                      <a href="#/Thingshome">Home</a>
                     </div>
                 </form>
             </div>

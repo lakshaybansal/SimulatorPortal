@@ -20,9 +20,14 @@ var MetricsTable = React.createClass({
     this.setState({fields: fields});
     console.log(this.state.fields);
   },
-  handleTextValues: function (event, metricName) {
+  handleTextValues: function (event, metricName, dataType) {
     var fields = this.state.fields;
-    fields[metricName] = event.target.value;
+    if(dataType == 1) {
+      fields[metricName] = event.target.value;
+    }
+    else {
+      fields[metricName] = parseInt(event.target.value);
+    }
     this.setState({fields: fields});
     console.log(this.state.fields);
   },
@@ -42,9 +47,13 @@ var MetricsTable = React.createClass({
     var fieldsInitial;
     var self = this;
     axios.get('/api/getMetricValues').then(function (response){
+      if(response.data != '')
+      {
+        fieldsInitial=response.data;
+        self.setState({fields:fieldsInitial});
+      }
+      console.log(response.data);
 
-      fieldsInitial=response.data;
-      self.setState({fields:fieldsInitial});
       console.log('Loaded metrics file successfully!');
 
     }, function (error) {
@@ -61,7 +70,7 @@ var MetricsTable = React.createClass({
         if(dataType == 0 || dataType==1)
         {
           return <TextField key={metricName} hintText="Enter value" value={self.state.fields[metricName] || ''}
-          onChange={function(e) {self.handleTextValues(e, metricName); } } />;
+          onChange={function(e) {self.handleTextValues(e, metricName, dataType); } } />;
         }
         if(dataType == 2)
         {

@@ -15,20 +15,20 @@ require('style!css!sass!applicationStyles');
 injectTapEventPlugin();
 
 class  App extends React.Component{
-render(){
-  return(
-   <MuiThemeProvider>
-     <Router history={hashHistory}>
-       <Route path="/" component={Main}>
-         <Route path="/Metricshome" component={MetricsHome}></Route>
-         <Route path="/Thingshome" component={ThingsHome}></Route>
-         <IndexRoute component={Login}/>
-       </Route>
-     </Router>
- </MuiThemeProvider>
+  render(){
+    return(
+     <MuiThemeProvider>
+       <Router history={hashHistory}>
+         <Route path="/" component={Main}>
+           <Route path="/Metricshome" component={MetricsHome}></Route>
+           <Route path="/Thingshome" component={ThingsHome}></Route>
+           <IndexRoute component={Login}/>
+         </Route>
+       </Router>
+   </MuiThemeProvider>
 
-);
-}
+    );
+  }
 }
 
 ReactDOM.render(

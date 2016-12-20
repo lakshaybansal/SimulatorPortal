@@ -8,16 +8,37 @@ import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Slider from 'material-ui/Slider';
+import TimePicker from 'material-ui/TimePicker';
+import InputRange from 'react-input-range';
+
 //var i=0;
 var MetricsTable = React.createClass({
   getInitialState: function () {
     return {
-      fields: {},
-    secondSlider: 50,
+    fields: {},
+    defaultSlider: {
+      min: 10,
+      max: 200
+    }
     }
   },
-  handleSecondSlider:function(event, value){
-    this.setState({secondSlider: value});
+  handleSliderValues:function(event, value,metricName){
+    console.log("Slide: ",value);
+    var fields = this.state.fields;
+    if(fields[metricName] == undefined) {
+      fields[metricName] = {};
+    }
+    else {
+      fields[metricName].min = value.min;
+      fields[metricName].max = value.max;
+      this.setState({fields: fields});
+    }
+  },
+  handleTimePicker:function(event,value,metricName){
+    var fields = this.state.fields;
+    fields[metricName] = value;
+    this.setState({fields: fields});
+    console.log(this.state.fields);
   },
   handleBooleanValues: function (event, index, value, metricName) {
     var fields = this.state.fields;
@@ -57,10 +78,7 @@ var MetricsTable = React.createClass({
         fieldsInitial=response.data;
         self.setState({fields:fieldsInitial});
       }
-      console.log(response.data);
-
       console.log('Loaded metrics file successfully!');
-
     }, function (error) {
       console.log(error);
     });
@@ -72,12 +90,25 @@ var MetricsTable = React.createClass({
         var dataType=metric.data_type;
         var metricName=metric.name;
 
-        if(dataType == 0 || dataType==1)
+        if(dataType == 0)
         {
-          return <TextField key={metricName} hintText="Enter value" value={self.state.fields[metricName] || ''}
-          onChange={function(e) {self.handleTextValues(e, metricName, dataType); } } />;
+          return <InputRange className="InputRange-slider" defaultValue={self.state.defaultSlider}
+                              maxValue={200}
+                              minValue={10}
+                              step={2}
+                              value={self.state.fields[metricName]}
+                              onChange={function(event, value) {self.handleSliderValues(event, value,metricName)}}
+                            />;
         }
-        if(dataType == 2)
+        else if(dataType == 1) {
+          console.log(self.state.fields[metricName]);
+          return <TimePicker key={metricName} hintText="12hr Format with auto ok"
+            autoOk={true}  value={new Date(self.state.fields[metricName])}
+          onChange={function(event, value) {self.handleTimePicker(event, value,metricName)}} />
+          // return <TextField key={metricName} hintText="Enter value" value={self.state.fields[metricName] || ''}
+          // onChange={function(e) {self.handleTextValues(e, metricName, dataType); } } />;
+        }
+        else if(dataType == 2)
         {
           // Set default false values for all SelectFields
           // var fields = self.state.fields;
@@ -100,7 +131,7 @@ var MetricsTable = React.createClass({
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn colSpan="5" tooltip="List of All Metrics" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="4" tooltip="List of All Metrics" style={{textAlign: 'center'}}>
                 <h2>List of All Metrics</h2>
               </TableHeaderColumn>
             </TableRow>
@@ -109,7 +140,6 @@ var MetricsTable = React.createClass({
               <TableHeaderColumn><h4>Metric Key</h4></TableHeaderColumn>
               <TableHeaderColumn><h4>Metric Name</h4></TableHeaderColumn>
               <TableHeaderColumn><h4>Metric Value</h4></TableHeaderColumn>
-              <TableHeaderColumn><h4>Metric Range</h4></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
@@ -123,12 +153,6 @@ var MetricsTable = React.createClass({
                   <TableRowColumn>
                     {valueField(metric)}
                   </TableRowColumn>
-                  <TableRowColumn>
-                  
-                  <Slider min={10} max={200} step={1} defaultValue={50} value={self.state.secondSlider}
-                 onChange={self.handleSecondSlider}/>
-                 {self.state.secondSlider}
-                 </TableRowColumn>
                 </TableRow>
               )
             }
@@ -143,6 +167,8 @@ var MetricsTable = React.createClass({
             </TableRow>
           </TableFooter>
         </Table>
+
+
 
       </div>
     );

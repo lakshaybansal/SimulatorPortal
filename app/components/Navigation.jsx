@@ -36,7 +36,7 @@ handleHomeClose:function(){
     );
     return (
       <div>
-          <AppBar title="Datonis Portal" onLeftIconButtonTouchTap={this.handleToggle} iconClassNameRight="muidocs-icon-navigation-expand-more"
+          <AppBar title="Datonis Portal" onLeftIconButtonTouchTap={this.handleToggle} 
           iconElementRight={rightButtons} />
             <Drawer docked={false}
               width={300}

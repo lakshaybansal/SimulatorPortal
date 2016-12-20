@@ -7,12 +7,17 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Slider from 'material-ui/Slider';
 //var i=0;
 var MetricsTable = React.createClass({
   getInitialState: function () {
     return {
-      fields: {}
+      fields: {},
+    secondSlider: 50,
     }
+  },
+  handleSecondSlider:function(event, value){
+    this.setState({secondSlider: value});
   },
   handleBooleanValues: function (event, index, value, metricName) {
     var fields = this.state.fields;
@@ -95,7 +100,7 @@ var MetricsTable = React.createClass({
         <Table selectable={false}>
           <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
-              <TableHeaderColumn colSpan="4" tooltip="List of All Metrics" style={{textAlign: 'center'}}>
+              <TableHeaderColumn colSpan="5" tooltip="List of All Metrics" style={{textAlign: 'center'}}>
                 <h2>List of All Metrics</h2>
               </TableHeaderColumn>
             </TableRow>
@@ -104,6 +109,7 @@ var MetricsTable = React.createClass({
               <TableHeaderColumn><h4>Metric Key</h4></TableHeaderColumn>
               <TableHeaderColumn><h4>Metric Name</h4></TableHeaderColumn>
               <TableHeaderColumn><h4>Metric Value</h4></TableHeaderColumn>
+              <TableHeaderColumn><h4>Metric Range</h4></TableHeaderColumn>
             </TableRow>
           </TableHeader>
           <TableBody displayRowCheckbox={false} showRowHover={true}>
@@ -113,9 +119,16 @@ var MetricsTable = React.createClass({
                   <TableRowColumn>{i}</TableRowColumn>
                   <TableRowColumn>{metric.metric_key}</TableRowColumn>
                   <TableRowColumn>{metric.name}</TableRowColumn>
+
                   <TableRowColumn>
                     {valueField(metric)}
                   </TableRowColumn>
+                  <TableRowColumn>
+                  
+                  <Slider min={10} max={200} step={1} defaultValue={50} value={self.state.secondSlider}
+                 onChange={self.handleSecondSlider}/>
+                 {self.state.secondSlider}
+                 </TableRowColumn>
                 </TableRow>
               )
             }
